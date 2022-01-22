@@ -5,6 +5,7 @@ from flask import request
 from flask import render_template
 from flask import current_app
 from flask import send_from_directory, jsonify
+from datetime import datetime
 import random
 
 app = Flask(__name__,static_folder='./static')
@@ -16,8 +17,8 @@ legalkeys = keys.read().splitlines()
 
 noauth = app.response_class(response = json.dumps({"message": "Did not get valid auth code in request"}), status = 400, mimetype='application/json')
 nokey = app.response_class(response = json.dumps({"message": "Did not get valid key code in request"}), status = 400, mimetype='application/json')
-
-apifailure = app.response_class(response = json.dumps({"message": "Your API call failed due to a server fault"}), status = 400, mimetype='application/json')
+inactive = app.response_class(response = json.dumps({"message": "This endpoint is inactive due to maintenance."}), status = 503, mimetype='application/json')
+apifailure = app.response_class(response = json.dumps({"message": "Your API call failed due to a server fault"}), status = 500, mimetype='application/json')
 
 
 #########################################USERS STUFF#############################################
@@ -46,6 +47,10 @@ def get_test():
 
 @app.route("/info-one", methods = ['GET'])
 def info_one():
+    hour = datetime.now().time().hour
+    if not((hour >= 0 and hour <= 6) or (hour >= 12 and hour <= 18)):
+        # inactive
+        return inactive
     auth = request.args.get('auth')
     key = request.args.get('key')
     failure_odds = 0.0
@@ -58,6 +63,10 @@ def info_one():
 
 @app.route("/info-two", methods = ['GET'])
 def info_two():
+    hour = datetime.now().time().hour
+    if not((hour >= 0 and hour <= 6) or (hour >= 12 and hour <= 18)):
+        # inactive
+        return inactive
     auth = request.args.get('auth')
     key = request.args.get('key')
     failure_odds = 0.0
@@ -70,6 +79,10 @@ def info_two():
 
 @app.route("/info-three", methods = ['GET'])
 def info_three():
+    hour = datetime.now().time().hour
+    if not((hour >= 0 and hour <= 6) or (hour >= 12 and hour <= 18)):
+        # inactive
+        return inactive
     auth = request.args.get('auth')
     key = request.args.get('key')
     failure_odds = 0.0
@@ -79,6 +92,67 @@ def info_three():
     dictionary_to_return = jsoner[43:]
     
     return dataToRequest(failure_odds, dictionary_to_return, auth, key)
+
+
+
+@app.route("/info-four", methods = ['GET'])
+def info_four():
+    hour = datetime.now().time().hour
+    if ((hour >= 0 and hour <= 6) or (hour >= 12 and hour <= 18)):
+        # inactive
+        return inactive
+    auth = request.args.get('auth')
+    key = request.args.get('key')
+    failure_odds = 0.0
+
+    datadict = open("data/studentinfo.json", "r")
+    jsoner = json.loads(datadict.read())
+    dictionary_to_return = jsoner[0:15]
+    
+    return dataToRequest(failure_odds, dictionary_to_return, auth, key)
+
+@app.route("/info-five", methods = ['GET'])
+def info_five():
+    hour = datetime.now().time().hour
+    if ((hour >= 0 and hour <= 6) or (hour >= 12 and hour <= 18)):
+        # inactive
+        return inactive
+    auth = request.args.get('auth')
+    key = request.args.get('key')
+    failure_odds = 0.0
+
+    datadict = open("data/studentinfo.json", "r")
+    jsoner = json.loads(datadict.read())
+    dictionary_to_return = jsoner[15:43]
+    
+    return dataToRequest(failure_odds, dictionary_to_return, auth, key)
+
+@app.route("/info-six", methods = ['GET'])
+def info_six():
+    hour = datetime.now().time().hour
+    if ((hour >= 0 and hour <= 6) or (hour >= 12 and hour <= 18)):
+        # inactive
+        return inactive
+    auth = request.args.get('auth')
+    key = request.args.get('key')
+    failure_odds = 0.0
+
+    datadict = open("data/studentinfo.json", "r")
+    jsoner = json.loads(datadict.read())
+    dictionary_to_return = jsoner[43:]
+    
+    return dataToRequest(failure_odds, dictionary_to_return, auth, key)
+
+
+@app.route("/get-active", methods = ['GET'])
+def get_active():
+    hour = datetime.now().time().hour
+    output = list()
+    if ((hour >= 0 and hour <= 6) or (hour >= 12 and hour <= 18)):
+        output = ["/info-one", "/info-two", "/info-three"]
+    else:
+        output = ["/info-four", "/info-five", "/info-six"]    
+    return make200(output)
 
 
 #############################################GENERIC STUFF###########################################
