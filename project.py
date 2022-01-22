@@ -53,7 +53,7 @@ def info_one():
         return inactive
     auth = request.args.get('auth')
     key = request.args.get('key')
-    failure_odds = 0.0
+    failure_odds = 0.1
 
     datadict = open("data/studentinfo.json", "r")
     jsoner = json.loads(datadict.read())
@@ -69,7 +69,7 @@ def info_two():
         return inactive
     auth = request.args.get('auth')
     key = request.args.get('key')
-    failure_odds = 0.0
+    failure_odds = 0.1
 
     datadict = open("data/studentinfo.json", "r")
     jsoner = json.loads(datadict.read())
@@ -85,7 +85,7 @@ def info_three():
         return inactive
     auth = request.args.get('auth')
     key = request.args.get('key')
-    failure_odds = 0.0
+    failure_odds = 0.1
 
     datadict = open("data/studentinfo.json", "r")
     jsoner = json.loads(datadict.read())
@@ -103,7 +103,7 @@ def info_four():
         return inactive
     auth = request.args.get('auth')
     key = request.args.get('key')
-    failure_odds = 0.0
+    failure_odds = 0.1
 
     datadict = open("data/studentinfo.json", "r")
     jsoner = json.loads(datadict.read())
@@ -119,7 +119,7 @@ def info_five():
         return inactive
     auth = request.args.get('auth')
     key = request.args.get('key')
-    failure_odds = 0.0
+    failure_odds = 0.1
 
     datadict = open("data/studentinfo.json", "r")
     jsoner = json.loads(datadict.read())
@@ -135,7 +135,7 @@ def info_six():
         return inactive
     auth = request.args.get('auth')
     key = request.args.get('key')
-    failure_odds = 0.0
+    failure_odds = 0.1
 
     datadict = open("data/studentinfo.json", "r")
     jsoner = json.loads(datadict.read())
