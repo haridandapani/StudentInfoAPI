@@ -55,7 +55,7 @@ def info_one():
     key = request.args.get('key')
     failure_odds = 0.1
 
-    datadict = open("data/studentinfo.json", "r")
+    datadict = open("data/studentInfoGet.json", "r")
     jsoner = json.loads(datadict.read())
     dictionary_to_return = jsoner[0:15]
     
@@ -71,7 +71,7 @@ def info_two():
     key = request.args.get('key')
     failure_odds = 0.1
 
-    datadict = open("data/studentinfo.json", "r")
+    datadict = open("data/studentInfoGet.json", "r")
     jsoner = json.loads(datadict.read())
     dictionary_to_return = jsoner[15:43]
     
@@ -87,7 +87,7 @@ def info_three():
     key = request.args.get('key')
     failure_odds = 0.1
 
-    datadict = open("data/studentinfo.json", "r")
+    datadict = open("data/studentInfoGet.json", "r")
     jsoner = json.loads(datadict.read())
     dictionary_to_return = jsoner[43:]
     
@@ -105,7 +105,7 @@ def info_four():
     key = request.args.get('key')
     failure_odds = 0.1
 
-    datadict = open("data/studentinfo.json", "r")
+    datadict = open("data/studentInfoGet.json", "r")
     jsoner = json.loads(datadict.read())
     dictionary_to_return = jsoner[0:15]
     
@@ -121,7 +121,7 @@ def info_five():
     key = request.args.get('key')
     failure_odds = 0.1
 
-    datadict = open("data/studentinfo.json", "r")
+    datadict = open("data/studentInfoGet.json", "r")
     jsoner = json.loads(datadict.read())
     dictionary_to_return = jsoner[15:43]
     
@@ -137,7 +137,7 @@ def info_six():
     key = request.args.get('key')
     failure_odds = 0.1
 
-    datadict = open("data/studentinfo.json", "r")
+    datadict = open("data/studentInfoGet.json", "r")
     jsoner = json.loads(datadict.read())
     dictionary_to_return = jsoner[43:]
     
